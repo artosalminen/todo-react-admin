@@ -1,25 +1,15 @@
-import logo from './logo.svg';
-import './App.css';
+// in src/App.js
+import * as React from "react";
+import { Admin, Resource } from 'react-admin';
+import jsonServerProvider from 'ra-data-json-server';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+import { TodoList } from './todos/list'
+import { TodoEdit } from './todos/edit'
+import { TodoCreate } from "./todos/create";
+
+const dataProvider = jsonServerProvider('https://jsonplaceholder.typicode.com');
+const App = () => <Admin dataProvider={dataProvider}>
+  <Resource name="todos" list={TodoList} edit={TodoEdit} create={TodoCreate}></Resource>
+</Admin>;
 
 export default App;
